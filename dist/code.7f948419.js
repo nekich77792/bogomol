@@ -125,25 +125,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Input = exports.State = exports.LiveObj = exports.ENEMY1 = exports.HERO = exports.DEATH = exports.JUMP = exports.GO = exports.IDLE = exports.L = exports.R = exports.Platform = void 0;
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -158,17 +154,17 @@ var GameObj = function GameObj(x, y) {
 
 ;
 
-var Platform = /*#__PURE__*/function (_GameObj) {
+var Platform =
+/*#__PURE__*/
+function (_GameObj) {
   _inherits(Platform, _GameObj);
-
-  var _super = _createSuper(Platform);
 
   function Platform(x, y, w) {
     var _this;
 
     _classCallCheck(this, Platform);
 
-    _this = _super.call(this, x, y);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Platform).call(this, x, y));
     _this.w = w;
     return _this;
   }
@@ -197,10 +193,10 @@ exports.HERO = HERO;
 var ENEMY1 = 1;
 exports.ENEMY1 = ENEMY1;
 
-var LiveObj = /*#__PURE__*/function (_GameObj2) {
+var LiveObj =
+/*#__PURE__*/
+function (_GameObj2) {
   _inherits(LiveObj, _GameObj2);
-
-  var _super2 = _createSuper(LiveObj);
 
   function LiveObj(type, x, y) {
     var _this2;
@@ -209,7 +205,7 @@ var LiveObj = /*#__PURE__*/function (_GameObj2) {
 
     _classCallCheck(this, LiveObj);
 
-    _this2 = _super2.call(this, x, y);
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(LiveObj).call(this, x, y));
     _this2.vel = {
       x: 0,
       y: 0
@@ -226,7 +222,9 @@ var LiveObj = /*#__PURE__*/function (_GameObj2) {
 
 exports.LiveObj = LiveObj;
 
-var State = /*#__PURE__*/function () {
+var State =
+/*#__PURE__*/
+function () {
   function State(lvl) {
     _classCallCheck(this, State);
 
@@ -413,12 +411,6 @@ exports.applyPhysics = applyPhysics;
 
 var _classes = require("./classes");
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 //blabla
 function applyEnemyPhysics(_ref) {
   var vel = _ref.vel,
@@ -445,11 +437,12 @@ function applyEnemyPhysics(_ref) {
 }
 
 function applyPhysics(s, input) {
-  var _iterator = _createForOfIteratorHelper(s.enemies),
-      _step;
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    for (var _iterator = s.enemies[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var enemy = _step.value;
       if (enemy.state == _classes.DEATH) continue;
 
@@ -460,9 +453,18 @@ function applyPhysics(s, input) {
     } // enemies physics
 
   } catch (err) {
-    _iterator.e(err);
+    _didIteratorError = true;
+    _iteratorError = err;
   } finally {
-    _iterator.f();
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
   }
 
   s.enemies.forEach(applyEnemyPhysics); // hero physics
@@ -600,7 +602,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Sprite = /*#__PURE__*/function () {
+var Sprite =
+/*#__PURE__*/
+function () {
   function Sprite(img, anims) {
     _classCallCheck(this, Sprite);
 
@@ -738,12 +742,6 @@ require("./../levelEditor");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // 22:36 воры уехали...
 var sprites = new Map();
 var cam = {
@@ -836,11 +834,12 @@ function render(state) {
       attack = _state$hero.attack;
   sprites.get(state.hero).draw(ctx, st, pos, dir, attack); //-- enemy ------------
 
-  var _iterator = _createForOfIteratorHelper(state.enemies),
-      _step;
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    for (var _iterator = state.enemies[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var liveObject = _step.value;
       //console.log(liveObject)
       var sprite = sprites.get(liveObject);
@@ -848,9 +847,18 @@ function render(state) {
     } //shadowPlarform();
 
   } catch (err) {
-    _iterator.e(err);
+    _didIteratorError = true;
+    _iteratorError = err;
   } finally {
-    _iterator.f();
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
   }
 
   ctx.restore();
@@ -917,8 +925,8 @@ function loop() {
   (0, _canvasRenderer.render)(state);
   var xm = 50;
 
-  if (state.hero.vel.y == -5) {//new Platform(Math.random()*500,Math.random()*500,xm)
-  } // update time
+  if (state.hero.vel.y == -5) {} //new Platform(Math.random()*500,Math.random()*500,xm)
+  // update time
 
 
   _time.default.n++;
@@ -956,7 +964,7 @@ setInterval(()=>{
 }, 1000)
 
 */
-},{"./inputs":"inputs.js","./physics":"physics.js","./platforms":"platforms.js","./classes":"classes.js","./time":"time.js","./canvasRenderer/canvasRenderer":"canvasRenderer/canvasRenderer.js"}],"../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./inputs":"inputs.js","./physics":"physics.js","./platforms":"platforms.js","./classes":"classes.js","./time":"time.js","./canvasRenderer/canvasRenderer":"canvasRenderer/canvasRenderer.js"}],"../../.nvm/versions/node/v12.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -984,7 +992,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39345" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33511" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1015,9 +1023,8 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         assetsToAccept.forEach(function (v) {
           hmrAcceptRun(v[0], v[1]);
         });
-      } else if (location.reload) {
-        // `location` global exists in a web worker context but lacks `.reload()` function.
-        location.reload();
+      } else {
+        window.location.reload();
       }
     }
 
@@ -1160,5 +1167,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","code.js"], null)
+},{}]},{},["../../.nvm/versions/node/v12.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","code.js"], null)
 //# sourceMappingURL=/code.7f948419.js.map
