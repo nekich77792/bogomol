@@ -28,7 +28,7 @@ export const DEATH = 3;
 //--- types ----
 export const HERO = 0;
 export const ENEMY1 = 1;
-
+export const LAVAMAN = 2;
 
 export class LiveObj extends GameObj{
 
@@ -51,7 +51,8 @@ export class State{
 		this.hero = new LiveObj(HERO, 10, 10, IDLE);
 		//this.enemy = new LiveObj(ENEMY1, 490, 20, GO);
 		this.enemies = [new LiveObj(ENEMY1, 490, 20, GO),
-						new LiveObj(ENEMY1, 300, 100, GO),]
+						new LiveObj(ENEMY1, 300, 100, GO),
+						new LiveObj(LAVAMAN, 250, 100, GO)]
 		this.lvl = lvl;
 		//this.cam = {x:0,y:0}
 

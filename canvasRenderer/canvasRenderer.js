@@ -1,7 +1,8 @@
 import {drawAxes, drawSqrt} from './../graph'
 import forestboy from './../ForestBoy.png'
 import enemySheet from './../enemies.png'
-import {HERO, ENEMY1, JUMP, GO,IDLE, DEATH} from './../classes'
+import lavaSheet from './../assets/lavaman.png'
+import {HERO, ENEMY1, JUMP, GO,IDLE, DEATH, LAVAMAN} from './../classes'
 import {Sprite, Anim} from './sprite'
 import {} from './../levelEditor'
 
@@ -32,7 +33,13 @@ export function loadAssets(state){
 
 	for(let i = 0;i < state.enemies.length; i++){
 		let enemy = state.enemies[i]
-		sprites.set (enemy ,createEnemy1Sprite(enemy) )
+		switch (enemy.type) {
+			case ENEMY1: sprites.set (enemy ,createEnemy1Sprite(enemy) )
+				break;
+			case LAVAMAN: sprites.set (enemy ,createLavamanSprite(enemy) )
+				break;
+		}
+		
 
 	}
 	//sprites.set(ENEMY1, enemy);
@@ -66,6 +73,20 @@ function createEnemy1Sprite (enemy){
 	const enemyImage = new Image();
 	enemyImage.src = enemySheet;
 	return new Sprite(enemyImage, anims);
+	
+}
+
+function createLavamanSprite (enemy){
+	const anims  = new Map()
+	//n, x0, y0, w, h,spriteTime 
+	anims.set(GO, new Anim(50, 0, 0, 64, 64, 1))
+//	anims.set(DEATH, new Anim(4, 0, 0, 30, 15, 8))
+//	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+//	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
+
+	const lavaImage = new Image();
+	lavaImage.src = lavaSheet;
+	return new Sprite(lavaImage, anims);
 	
 }
 
