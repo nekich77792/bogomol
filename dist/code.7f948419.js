@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Input = exports.State = exports.LiveObj = exports.LAVAMAN = exports.ENEMY1 = exports.HERO = exports.DEATH = exports.JUMP = exports.GO = exports.IDLE = exports.L = exports.R = exports.Platform = void 0;
+exports.Input = exports.State = exports.LiveObj = exports.MECH = exports.CACO = exports.LAVAMAN = exports.ENEMY1 = exports.HERO = exports.DEATH = exports.JUMP = exports.GO = exports.IDLE = exports.L = exports.R = exports.Platform = void 0;
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -198,6 +198,10 @@ var ENEMY1 = 1;
 exports.ENEMY1 = ENEMY1;
 var LAVAMAN = 2;
 exports.LAVAMAN = LAVAMAN;
+var CACO = 3;
+exports.CACO = CACO;
+var MECH = 4;
+exports.MECH = MECH;
 
 var LiveObj = /*#__PURE__*/function (_GameObj2) {
   _inherits(LiveObj, _GameObj2);
@@ -234,7 +238,7 @@ var State = /*#__PURE__*/function () {
 
     this.hero = new LiveObj(HERO, 10, 10, IDLE); //this.enemy = new LiveObj(ENEMY1, 490, 20, GO);
 
-    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO)];
+    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO), new LiveObj(CACO, 480, 235, GO), new LiveObj(MECH, 500, 235, GO)];
     this.lvl = lvl; //this.cam = {x:0,y:0}
   }
 
@@ -588,6 +592,10 @@ module.exports = "/ForestBoy.9ce9ce9f.png";
 module.exports = "/enemies.b6a10c51.png";
 },{}],"assets/lavaman.png":[function(require,module,exports) {
 module.exports = "/lavaman.25e0ec4d.png";
+},{}],"assets/cacodaemon-combined.png":[function(require,module,exports) {
+module.exports = "/cacodaemon-combined.7da1f6e6.png";
+},{}],"assets/mech.png":[function(require,module,exports) {
+module.exports = "/mech.7979e1e1.png";
 },{}],"canvasRenderer/sprite.js":[function(require,module,exports) {
 "use strict";
 
@@ -736,6 +744,10 @@ var _enemies = _interopRequireDefault(require("./../enemies.png"));
 
 var _lavaman = _interopRequireDefault(require("./../assets/lavaman.png"));
 
+var _cacodaemonCombined = _interopRequireDefault(require("./../assets/cacodaemon-combined.png"));
+
+var _mech = _interopRequireDefault(require("./../assets/mech.png"));
+
 var _classes = require("./../classes");
 
 var _sprite = require("./sprite");
@@ -781,6 +793,14 @@ function loadAssets(state) {
       case _classes.LAVAMAN:
         sprites.set(enemy, createLavamanSprite(enemy));
         break;
+
+      case _classes.CACO:
+        sprites.set(enemy, createCacoSprite(enemy));
+        break;
+
+      case _classes.MECH:
+        sprites.set(enemy, createMechSprite(enemy));
+        break;
     }
   } //sprites.set(ENEMY1, enemy);
 
@@ -814,13 +834,37 @@ function createEnemy1Sprite(enemy) {
 function createLavamanSprite(enemy) {
   var anims = new Map(); //n, x0, y0, w, h,spriteTime 
 
-  anims.set(_classes.GO, new _sprite.Anim(50, 0, 0, 64, 64, 1)); //	anims.set(DEATH, new Anim(4, 0, 0, 30, 15, 8))
-  //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+  anims.set(_classes.GO, new _sprite.Anim(50, 0, 0, 64, 64, 1));
+  anims.set(_classes.DEATH, new _sprite.Anim(50, 0, 0, 64, 64, 1)); //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
   //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
 
   var lavaImage = new Image();
   lavaImage.src = _lavaman.default;
   return new _sprite.Sprite(lavaImage, anims);
+}
+
+function createCacoSprite(enemy) {
+  var anims = new Map(); //n, x0, y0, w, h,spriteTime 
+
+  anims.set(_classes.GO, new _sprite.Anim(90, 0, 0, 64, 64, 1));
+  anims.set(_classes.DEATH, new _sprite.Anim(90, 0, 0, 64, 64, 1)); //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+  //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
+
+  var cacoImage = new Image();
+  cacoImage.src = _cacodaemonCombined.default;
+  return new _sprite.Sprite(cacoImage, anims);
+}
+
+function createMechSprite(enemy) {
+  var anims = new Map(); //n, x0, y0, w, h,spriteTime 
+
+  anims.set(_classes.GO, new _sprite.Anim(54, 0, 0, 64, 64, 1));
+  anims.set(_classes.DEATH, new _sprite.Anim(54, 0, 0, 64, 64, 1)); //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+  //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
+
+  var mechImage = new Image();
+  mechImage.src = _mech.default;
+  return new _sprite.Sprite(mechImage, anims);
 }
 
 function coords(ctx, hero) {
@@ -882,7 +926,7 @@ function render(state) {
 
   ctx.restore();
 }
-},{"./../graph":"graph.js","./../ForestBoy.png":"ForestBoy.png","./../enemies.png":"enemies.png","./../assets/lavaman.png":"assets/lavaman.png","./../classes":"classes.js","./sprite":"canvasRenderer/sprite.js","./../levelEditor":"levelEditor.js"}],"code.js":[function(require,module,exports) {
+},{"./../graph":"graph.js","./../ForestBoy.png":"ForestBoy.png","./../enemies.png":"enemies.png","./../assets/lavaman.png":"assets/lavaman.png","./../assets/cacodaemon-combined.png":"assets/cacodaemon-combined.png","./../assets/mech.png":"assets/mech.png","./../classes":"classes.js","./sprite":"canvasRenderer/sprite.js","./../levelEditor":"levelEditor.js"}],"code.js":[function(require,module,exports) {
 "use strict";
 
 var _inputs = require("./inputs");
@@ -941,12 +985,7 @@ function loop() {
   // zzxsz
 
   garbageCollector();
-  (0, _canvasRenderer.render)(state);
-  var xm = 50;
-
-  if (state.hero.vel.y == -5) {//new Platform(Math.random()*500,Math.random()*500,xm)
-  } // update time
-
+  (0, _canvasRenderer.render)(state); // update time
 
   _time.default.n++;
 } //--- start -----------
@@ -1011,7 +1050,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42061" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43987" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

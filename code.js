@@ -57,10 +57,7 @@ function loop(){
 	
 	garbageCollector();
 	render(state);
-	let xm = 50
-	if (state.hero.vel.y == -5){
-		//new Platform(Math.random()*500,Math.random()*500,xm)
-	}
+
 	
 	// update time
 	time.n++

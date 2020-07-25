@@ -2,7 +2,9 @@ import {drawAxes, drawSqrt} from './../graph'
 import forestboy from './../ForestBoy.png'
 import enemySheet from './../enemies.png'
 import lavaSheet from './../assets/lavaman.png'
-import {HERO, ENEMY1, JUMP, GO,IDLE, DEATH, LAVAMAN} from './../classes'
+import cacoSheet from './../assets/cacodaemon-combined.png'
+import mechSheet from './../assets/mech.png'
+import {HERO, ENEMY1, JUMP, GO,IDLE, DEATH, LAVAMAN, CACO, MECH} from './../classes'
 import {Sprite, Anim} from './sprite'
 import {} from './../levelEditor'
 
@@ -38,6 +40,10 @@ export function loadAssets(state){
 				break;
 			case LAVAMAN: sprites.set (enemy ,createLavamanSprite(enemy) )
 				break;
+			case CACO: sprites.set (enemy ,createCacoSprite(enemy) )
+				break;
+			case MECH: sprites.set (enemy ,createMechSprite(enemy) )
+				break;	
 		}
 		
 
@@ -80,20 +86,43 @@ function createLavamanSprite (enemy){
 	const anims  = new Map()
 	//n, x0, y0, w, h,spriteTime 
 	anims.set(GO, new Anim(50, 0, 0, 64, 64, 1))
-//	anims.set(DEATH, new Anim(4, 0, 0, 30, 15, 8))
+	anims.set(DEATH, new Anim(50, 0, 0, 64, 64, 1))
 //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
 //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
 
-	const lavaImage = new Image();
+const lavaImage = new Image();
 	lavaImage.src = lavaSheet;
 	return new Sprite(lavaImage, anims);
-	
+
 }
 
+function createCacoSprite (enemy){
+	const anims  = new Map()
+	//n, x0, y0, w, h,spriteTime 
+	anims.set(GO, new Anim(90, 0, 0, 64, 64, 1))
+	anims.set(DEATH, new Anim(90, 0, 0, 64, 64, 1))
+//	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+//	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
 
+	const cacoImage = new Image();
+	cacoImage.src = cacoSheet;
+	return new Sprite(cacoImage, anims);
 
+}
 
+function createMechSprite (enemy){
+	const anims  = new Map()
+	//n, x0, y0, w, h,spriteTime 
+	anims.set(GO, new Anim(54, 0, 0, 64, 64, 1))
+	anims.set(DEATH, new Anim(54, 0, 0, 64, 64, 1))
+//	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+//	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
 
+	const mechImage = new Image();
+	mechImage.src = mechSheet;
+	return new Sprite(mechImage, anims);
+
+}
 
 export function coords (ctx, hero){
 

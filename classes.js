@@ -19,24 +19,26 @@ export const R = 1
 export const L = -1
 
 //-- states -----
-export const IDLE = 0;
-export const GO = 1;
-export const JUMP = 2;
-export const DEATH = 3;
+export const IDLE = 0
+export const GO = 1
+export const JUMP = 2
+export const DEATH = 3
 
 
 //--- types ----
-export const HERO = 0;
-export const ENEMY1 = 1;
-export const LAVAMAN = 2;
+export const HERO = 0
+export const ENEMY1 = 1
+export const LAVAMAN = 2
+export const CACO = 3
+export const MECH = 4
 
 export class LiveObj extends GameObj{
 
 	constructor(type,x,y, state = IDLE){
 		super(x,y)
 		this.vel = {x:0,y:0}
-		this.state = state;
-		this.type = type;
+		this.state = state
+		this.type = type
 		this.dir = R 
 		this.attack = -1
 	}
@@ -52,7 +54,12 @@ export class State{
 		//this.enemy = new LiveObj(ENEMY1, 490, 20, GO);
 		this.enemies = [new LiveObj(ENEMY1, 490, 20, GO),
 						new LiveObj(ENEMY1, 300, 100, GO),
-						new LiveObj(LAVAMAN, 250, 100, GO)]
+						new LiveObj(LAVAMAN, 250, 100, GO),
+						new LiveObj(CACO, 480, 235, GO),
+						new LiveObj(MECH, 500, 235, GO),
+						
+
+						]
 		this.lvl = lvl;
 		//this.cam = {x:0,y:0}
 
