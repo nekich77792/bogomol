@@ -4,10 +4,10 @@ import {IDLE, GO, JUMP, L, R, DEATH} from './classes'
 
 //blabla
 
-function applyEnemyPhysics ({vel, pos, state, dir} ) {
+function applyEnemyPhysics ({vel, pos, state, dir, speed} ) {
 	
 	if (state == GO) {
-		vel.x = -0.65
+		vel.x = -speed
 		vel.y += 0.25
 		pos.x += vel.x
 		pos.y += vel.y

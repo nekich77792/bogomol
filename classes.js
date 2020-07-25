@@ -34,9 +34,10 @@ export const MECH = 4
 
 export class LiveObj extends GameObj{
 
-	constructor(type,x,y, state = IDLE){
+	constructor(type,x,y, state = IDLE, speed = 0.65){
 		super(x,y)
 		this.vel = {x:0,y:0}
+		this.speed = speed
 		this.state = state
 		this.type = type
 		this.dir = R 
@@ -56,7 +57,7 @@ export class State{
 						new LiveObj(ENEMY1, 300, 100, GO),
 						new LiveObj(LAVAMAN, 250, 100, GO),
 						new LiveObj(CACO, 480, 235, GO),
-						new LiveObj(MECH, 500, 235, GO),
+						new LiveObj(MECH, 550, 235, GO, 0.85),
 						
 
 						]

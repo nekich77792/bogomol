@@ -212,6 +212,7 @@ var LiveObj = /*#__PURE__*/function (_GameObj2) {
     var _this2;
 
     var state = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : IDLE;
+    var speed = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.65;
 
     _classCallCheck(this, LiveObj);
 
@@ -220,6 +221,7 @@ var LiveObj = /*#__PURE__*/function (_GameObj2) {
       x: 0,
       y: 0
     };
+    _this2.speed = speed;
     _this2.state = state;
     _this2.type = type;
     _this2.dir = R;
@@ -238,7 +240,7 @@ var State = /*#__PURE__*/function () {
 
     this.hero = new LiveObj(HERO, 10, 10, IDLE); //this.enemy = new LiveObj(ENEMY1, 490, 20, GO);
 
-    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO), new LiveObj(CACO, 480, 235, GO), new LiveObj(MECH, 500, 235, GO)];
+    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO), new LiveObj(CACO, 480, 235, GO), new LiveObj(MECH, 550, 235, GO, 0.85)];
     this.lvl = lvl; //this.cam = {x:0,y:0}
   }
 
@@ -430,10 +432,11 @@ function applyEnemyPhysics(_ref) {
   var vel = _ref.vel,
       pos = _ref.pos,
       state = _ref.state,
-      dir = _ref.dir;
+      dir = _ref.dir,
+      speed = _ref.speed;
 
   if (state == _classes.GO) {
-    vel.x = -0.65;
+    vel.x = -speed;
     vel.y += 0.25;
     pos.x += vel.x;
     pos.y += vel.y;
