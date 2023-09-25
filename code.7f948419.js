@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.State = exports.R = exports.Platform = exports.LiveObj = exports.LAVAMAN = exports.L = exports.JUMP = exports.Input = exports.IDLE = exports.HERO = exports.GO = exports.ENEMY1 = exports.DEATH = void 0;
+exports.State = exports.R = exports.Platform = exports.MECH = exports.LiveObj = exports.LAVAMAN = exports.L = exports.JUMP = exports.Input = exports.IDLE = exports.HERO = exports.GO = exports.ENEMY1 = exports.DEATH = exports.CACO = void 0;
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -170,18 +170,22 @@ var DEATH = exports.DEATH = 3;
 var HERO = exports.HERO = 0;
 var ENEMY1 = exports.ENEMY1 = 1;
 var LAVAMAN = exports.LAVAMAN = 2;
+var CACO = exports.CACO = 3;
+var MECH = exports.MECH = 4;
 var LiveObj = exports.LiveObj = /*#__PURE__*/function (_GameObj2) {
   _inherits(LiveObj, _GameObj2);
   var _super2 = _createSuper(LiveObj);
   function LiveObj(type, x, y) {
     var _this2;
     var state = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : IDLE;
+    var speed = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.65;
     _classCallCheck(this, LiveObj);
     _this2 = _super2.call(this, x, y);
     _this2.vel = {
       x: 0,
       y: 0
     };
+    _this2.speed = speed;
     _this2.state = state;
     _this2.type = type;
     _this2.dir = R;
@@ -195,7 +199,7 @@ var State = exports.State = /*#__PURE__*/function () {
     _classCallCheck(this, State);
     this.hero = new LiveObj(HERO, 10, 10, IDLE);
     //this.enemy = new LiveObj(ENEMY1, 490, 20, GO);
-    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO)];
+    this.enemies = [new LiveObj(ENEMY1, 490, 20, GO), new LiveObj(ENEMY1, 300, 100, GO), new LiveObj(LAVAMAN, 250, 100, GO), new LiveObj(CACO, 480, 235, GO), new LiveObj(MECH, 550, 235, GO, 0.85)];
     this.lvl = lvl;
     //this.cam = {x:0,y:0}
   }
@@ -352,9 +356,10 @@ function applyEnemyPhysics(_ref) {
   var vel = _ref.vel,
     pos = _ref.pos,
     state = _ref.state,
-    dir = _ref.dir;
+    dir = _ref.dir,
+    speed = _ref.speed;
   if (state == _classes.GO) {
-    vel.x = -0.65;
+    vel.x = -speed;
     vel.y += 0.25;
     pos.x += vel.x;
     pos.y += vel.y;
@@ -494,6 +499,10 @@ module.exports = "/ForestBoy.9ce9ce9f.png";
 module.exports = "/enemies.b6a10c51.png";
 },{}],"assets/lavaman.png":[function(require,module,exports) {
 module.exports = "/lavaman.25e0ec4d.png";
+},{}],"assets/cacodaemon-combined.png":[function(require,module,exports) {
+module.exports = "/cacodaemon-combined.7da1f6e6.png";
+},{}],"assets/mech.png":[function(require,module,exports) {
+module.exports = "/mech.7979e1e1.png";
 },{}],"canvasRenderer/sprite.js":[function(require,module,exports) {
 "use strict";
 
@@ -623,6 +632,8 @@ var _graph = require("./../graph");
 var _ForestBoy = _interopRequireDefault(require("./../ForestBoy.png"));
 var _enemies = _interopRequireDefault(require("./../enemies.png"));
 var _lavaman = _interopRequireDefault(require("./../assets/lavaman.png"));
+var _cacodaemonCombined = _interopRequireDefault(require("./../assets/cacodaemon-combined.png"));
+var _mech = _interopRequireDefault(require("./../assets/mech.png"));
 var _classes = require("./../classes");
 var _sprite = require("./sprite");
 require("./../levelEditor");
@@ -660,6 +671,12 @@ function loadAssets(state) {
       case _classes.LAVAMAN:
         sprites.set(enemy, createLavamanSprite(enemy));
         break;
+      case _classes.CACO:
+        sprites.set(enemy, createCacoSprite(enemy));
+        break;
+      case _classes.MECH:
+        sprites.set(enemy, createMechSprite(enemy));
+        break;
     }
   }
   //sprites.set(ENEMY1, enemy);
@@ -693,13 +710,37 @@ function createLavamanSprite(enemy) {
   var anims = new Map();
   //n, x0, y0, w, h,spriteTime 
   anims.set(_classes.GO, new _sprite.Anim(50, 0, 0, 64, 64, 1));
-  //	anims.set(DEATH, new Anim(4, 0, 0, 30, 15, 8))
+  anims.set(_classes.DEATH, new _sprite.Anim(50, 0, 0, 64, 64, 1));
   //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
   //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
 
   var lavaImage = new Image();
   lavaImage.src = _lavaman.default;
   return new _sprite.Sprite(lavaImage, anims);
+}
+function createCacoSprite(enemy) {
+  var anims = new Map();
+  //n, x0, y0, w, h,spriteTime 
+  anims.set(_classes.GO, new _sprite.Anim(90, 0, 0, 64, 64, 1));
+  anims.set(_classes.DEATH, new _sprite.Anim(90, 0, 0, 64, 64, 1));
+  //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+  //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
+
+  var cacoImage = new Image();
+  cacoImage.src = _cacodaemonCombined.default;
+  return new _sprite.Sprite(cacoImage, anims);
+}
+function createMechSprite(enemy) {
+  var anims = new Map();
+  //n, x0, y0, w, h,spriteTime 
+  anims.set(_classes.GO, new _sprite.Anim(54, 0, 0, 64, 64, 1));
+  anims.set(_classes.DEATH, new _sprite.Anim(54, 0, 0, 64, 64, 1));
+  //	anims.set(IDLE, new Anim(3, 11, 12, 16, 18, 14))
+  //	anims.set(JUMP, new Anim(3, 59, 44, 16, 18, 10))
+
+  var mechImage = new Image();
+  mechImage.src = _mech.default;
+  return new _sprite.Sprite(mechImage, anims);
 }
 function coords(ctx, hero) {
   ctx.font = '15px arial';
@@ -754,7 +795,7 @@ function render(state) {
   }
   ctx.restore();
 }
-},{"./../graph":"graph.js","./../ForestBoy.png":"ForestBoy.png","./../enemies.png":"enemies.png","./../assets/lavaman.png":"assets/lavaman.png","./../classes":"classes.js","./sprite":"canvasRenderer/sprite.js","./../levelEditor":"levelEditor.js"}],"code.js":[function(require,module,exports) {
+},{"./../graph":"graph.js","./../ForestBoy.png":"ForestBoy.png","./../enemies.png":"enemies.png","./../assets/lavaman.png":"assets/lavaman.png","./../assets/cacodaemon-combined.png":"assets/cacodaemon-combined.png","./../assets/mech.png":"assets/mech.png","./../classes":"classes.js","./sprite":"canvasRenderer/sprite.js","./../levelEditor":"levelEditor.js"}],"code.js":[function(require,module,exports) {
 "use strict";
 
 var _inputs = require("./inputs");
@@ -807,10 +848,6 @@ function loop() {
 
   garbageCollector();
   (0, _canvasRenderer.render)(state);
-  var xm = 50;
-  if (state.hero.vel.y == -5) {
-    //new Platform(Math.random()*500,Math.random()*500,xm)
-  }
 
   // update time
   _time.default.n++;
@@ -873,7 +910,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41925" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32981" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
